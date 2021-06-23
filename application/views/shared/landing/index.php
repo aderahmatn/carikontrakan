@@ -60,8 +60,27 @@
                         </li>
                         <li class="nav-item border mr-4 ml-2 border-light my-1 rounded"></li>
 
-                        <li class="nav-item">
-                            <a class="btn btn-danger <?= $this->uri->segment(2) == 'login' ? 'active' : '' ?>" href="<?= base_url('auth/login') ?>">Masuk</a>
+                        <?php if (!$this->session->userdata('nama_user')) { ?>
+                            <li class="nav-item">
+                                <a class="btn btn-danger <?= $this->uri->segment(2) == 'login' ? 'active' : '' ?>" href="<?= base_url('auth/login') ?>">Masuk</a>
+                            <?php } else { ?>
+                            <li class="nav-item dropdown ml-n3">
+                                <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="true">
+                                    <i class="fas fa-user-circle mr-3 ml-n2 fa-lg"></i><?= ucfirst($this->session->userdata('nama_user')) ?>
+                                </a>
+                                <div class="dropdown-menu bg-red">
+                                    <a href="<?= base_url('dashboard') ?>" class="dropdown-item text-white">
+                                        <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" class="dropdown-item text-white" data-toggle="modal" data-target="#modal-logout">
+                                        <i class="fas fa-sign-out-alt mr-2"></i> Keluar
+                                    </a>
+                                </div>
+                            </li>
+
+                        <?php } ?>
+
                         </li>
                     </ul>
                 </div>
@@ -86,8 +105,8 @@
                 <b class="h4">Apakah anda yakin ingin keluar?</b>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn  btn-light bg-white" data-dismiss="modal">Batal</button>
-                <a type="button" class="btn  btn-light" href="<?= site_url('auth/logout') ?>">Logout</a>
+                <button type="button" class="btn  btn-secondary bg-white" data-dismiss="modal">Batal</button>
+                <a type="button" class="btn  btn-danger" href="<?= site_url('auth/logout') ?>">Logout</a>
             </div>
         </div>
         <!-- /.modal-content -->

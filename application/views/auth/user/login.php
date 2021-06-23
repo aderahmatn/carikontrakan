@@ -46,21 +46,22 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Masuk untuk mencari kontrakan</p>
-                <div class="form-group">
-                    <input type="email" class="form-control" id="fusername" name="fusername" placeholder="email address" value="" required>
-                    <div class="invalid-feedback">
+                <form action="<?= base_url('auth/process_login') ?>" method="post" autocomplete="off">
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="femail" name="femail" placeholder="email address" require>
+                        <div class="invalid-feedback">
 
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control " id="fpassword" name="fpassword" placeholder="Password" value="" required>
-                    <div class="invalid-feedback">
+                    <div class="form-group">
+                        <input type="password" class="form-control " id="fpassword" name="fpassword" placeholder="Password" require>
+                        <div class="invalid-feedback">
 
+                        </div>
                     </div>
-                </div>
-                <p>Belum punya akun? <a href="<?= base_url('auth/register') ?>">Daftar disini</a></p>
-                <button type="submit" class="btn btn-danger btn-block">Masuk</button>
-
+                    <p>Belum punya akun? <a href="<?= base_url('auth/register') ?>">Daftar disini</a></p>
+                    <button type="submit" class="btn btn-danger btn-block">Masuk</button>
+                </form>
 
             </div>
             <!-- /.login-card-body -->

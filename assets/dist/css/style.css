@@ -11,7 +11,7 @@ body{
      height: 337px; object-fit: cover;
 }
 .bg-nude{
-    background-color: #FDFAE5;
+    background-color: #fab2c2;
 }
 .form-control:focus{
     /* border-color: #ff7391; */
@@ -373,4 +373,10 @@ section{
     border-radius: 10px;
     box-shadow: none;
     font-size: 15px;
+}
+.dropdown-item:hover{
+    background-color: #7e001b;
+}
+a:hover{
+    color: #7e001b;
 }
