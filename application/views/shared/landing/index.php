@@ -55,9 +55,6 @@
                         <li class="nav-item <?= $this->uri->segment(1) == 'tentang_saya' ? 'active' : '' ?>">
                             <a class="nav-link" href="<?= base_url('tentang_saya') ?>">Kontrakan</a>
                         </li>
-                        <li class="nav-item <?= $this->uri->segment(1) == 'paket_mua' ? 'active' : '' ?>">
-                            <a class="nav-link" href="<?= base_url('auth/register') ?>">Daftar</a>
-                        </li>
                         <li class="nav-item border mr-4 ml-2 border-light my-1 rounded"></li>
 
                         <?php if (!$this->session->userdata('nama_user')) { ?>
@@ -70,7 +67,11 @@
                                 </a>
                                 <div class="dropdown-menu bg-red">
                                     <a href="<?= base_url('dashboard') ?>" class="dropdown-item text-white">
-                                        <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                                        <i class="fas fa-user mr-2"></i> Profile Saya
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="<?= base_url('dashboard') ?>" class="dropdown-item text-white">
+                                        <i class="fas fa-door-open mr-2"></i> Kontrakan Saya
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     <a href="#" class="dropdown-item text-white" data-toggle="modal" data-target="#modal-logout">

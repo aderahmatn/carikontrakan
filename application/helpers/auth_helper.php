@@ -18,6 +18,15 @@ function check_not_login_user()
         redirect('auth/login', 'refresh');
     }
 }
+function check_not_login_admin()
+{
+    $CI = &get_instance();
+    $user_session = $CI->session->userdata('status');
+    if ($user_session != 'login_admin') {
+        $CI->session->set_flashdata('error', 'Silahkan Login terlebih dahulu!');
+        redirect('auth/loginAdmin', 'refresh');
+    }
+}
 
 function check_role_user()
 {

@@ -66,7 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <img src="<?= base_url('assets/images/user.jpg') ?>" class="img-circle" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="<?= base_url('profile') ?>" class="d-block"><?= ucwords($this->session->userdata('nama_user')) ?></a>
+                        <a href="<?= base_url('profile') ?>" class="d-block"><?= ucwords($this->session->userdata('nama_admin')) ?></a>
                     </div>
                 </div>
 
@@ -82,14 +82,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url('profile') ?>" class="nav-link <?= $this->uri->segment(1) == 'profile' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
-                                <i class="nav-icon fas fa-user"></i>
-                                <p>
-                                    Profile Saya
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="<?php echo base_url('iklansaya') ?>" class="nav-link <?= $this->uri->segment(1) == 'iklansaya' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
                                 <i class="nav-icon fas fa-door-open"></i>
                                 <p>
@@ -97,24 +89,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                         </li>
+
                         <li class="nav-item">
-                            <a href="<?php echo base_url('favorite') ?>" class="nav-link <?= $this->uri->segment(1) == 'favorite' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
-                                <i class="nav-icon fas fa-city"></i>
+                            <a href="<?php echo base_url('admin') ?>" class="nav-link <?= $this->uri->segment(1) == 'admin' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
+                                <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                    Kontrakan Favorite
+                                    Master Administrator
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('pemilik') ?>" class="nav-link <?= $this->uri->segment(1) == 'pemilik' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
+                                <i class="nav-icon fas fa-key"></i>
+                                <p>
+                                    Master Pemilik Kontrakan
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <hr>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url() ?>" class="nav-link">
-                                <i class="nav-icon fas fa-home"></i>
-                                <p>
-                                    Kembali ke Beranda
-                                </p>
-                            </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-logout">

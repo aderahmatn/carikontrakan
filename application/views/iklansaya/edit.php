@@ -3,12 +3,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Tambah Iklan Kontrakan </h1>
+                <h1>Edit Iklan Kontrakan </h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="<?= base_url('iklansaya') ?>" class="text-red">Iklan Kontrakan Saya</a></li>
-                    <li class="breadcrumb-item active">Tambah Iklan Kontrakan</li>
+                    <li class="breadcrumb-item active">Edit Iklan Kontrakan</li>
                 </ol>
             </div>
         </div>
@@ -23,12 +23,14 @@
             <!-- /.card-header -->
             <!-- form start -->
             <form role="form" method="POST" action="" autocomplete="off" enctype="multipart/form-data">
+                <input type="hidden" value="<?= $kontrakan->id_kontrakan ?>" name="fid_kontrakan">
+
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="fnama_kontrakan">Nama Kontrakan</label>
-                                <input type="text" class="form-control <?= form_error('fnama_kontrakan') ? 'is-invalid' : '' ?>" id="fnama_kontrakan" name="fnama_kontrakan" placeholder="Nama kontrakan" value="<?= $this->input->post('fnama_kontrakan'); ?>">
+                                <input type="text" class="form-control <?= form_error('fnama_kontrakan') ? 'is-invalid' : '' ?>" id="fnama_kontrakan" name="fnama_kontrakan" placeholder="Nama kontrakan" value="<?= $kontrakan->nama_kontrakan ?>">
                                 <div class="invalid-feedback">
                                     <?= form_error('fnama_kontrakan') ?>
                                 </div>
@@ -37,9 +39,9 @@
                                 <label for="fkategori">Kategori Kontrakan</label>
                                 <select class="form-control <?php echo form_error('fkategori') ? 'is-invalid' : '' ?>" id="fkategori" name="fkategori">
                                     <option hidden value="" selected>Pilih Kategori Kontrakan</option>
-                                    <option value="pria" <?= $this->input->post('fkategori') == 'pria' ? 'selected' : '' ?>>Khusus Pria</option>
-                                    <option value="wanita" <?= $this->input->post('fkategori') == 'wanita' ? 'selected' : '' ?>>Khusus Wanita</option>
-                                    <option value="campur" <?= $this->input->post('fkategori') == 'campur' ? 'selected' : '' ?>>Campur</option>
+                                    <option value="pria" <?= $kontrakan->kategori == 'pria' ? 'selected' : '' ?>>Khusus Pria</option>
+                                    <option value="wanita" <?= $kontrakan->kategori == 'wanita' ? 'selected' : '' ?>>Khusus Wanita</option>
+                                    <option value="campur" <?= $kontrakan->kategori == 'campur' ? 'selected' : '' ?>>Campur</option>
                                 </select>
                                 <div class="invalid-feedback">
                                     <?= form_error('fkategori') ?>
@@ -50,7 +52,7 @@
                                 <select class="form-control <?php echo form_error('fpemilik') ? 'is-invalid' : '' ?>" id="fpemilik" name="fpemilik">
                                     <option hidden value="" selected>Pilih Pemilik</option>
                                     <?php foreach ($pemilik as $key) : ?>
-                                        <option value="<?= $key->id_owner ?>" <?= $this->input->post('fpemilik') == $key->id_owner ? 'selected' : '' ?>><?= $key->nama_owner ?></option>
+                                        <option value="<?= $key->id_owner ?>" <?= $key->id_owner == $kontrakan->id_owner ? 'selected' : '' ?>><?= $key->nama_owner ?></option>
                                     <?php endforeach ?>
                                 </select>
                                 <div class="invalid-feedback">
@@ -59,29 +61,38 @@
                             </div>
                             <div class="form-group">
                                 <label for="fharga">Harga Per bulan</label>
-                                <input type="text" class="form-control <?= form_error('fharga') ? 'is-invalid' : '' ?>" id="fharga" name="fharga" placeholder="Harga per bulan" value="<?= $this->input->post('fharga'); ?>">
+                                <input type="text" class="form-control <?= form_error('fharga') ? 'is-invalid' : '' ?>" id="fharga" name="fharga" placeholder="Harga per bulan" value="<?= $kontrakan->harga ?>">
                                 <div class="invalid-feedback">
                                     <?= form_error('fharga') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="fkamar_tersedia">Jumlah Kamar Tersedia</label>
-                                <input type="text" class="form-control <?= form_error('fkamar_tersedia') ? 'is-invalid' : '' ?>" id="fkamar_tersedia" name="fkamar_tersedia" placeholder="Jumlah kamar tersedia" value="<?= $this->input->post('fkamar_tersedia'); ?>">
+                                <input type="text" class="form-control <?= form_error('fkamar_tersedia') ? 'is-invalid' : '' ?>" id="fkamar_tersedia" name="fkamar_tersedia" placeholder="Jumlah kamar tersedia" value="<?= $kontrakan->kamar_tersedia ?>">
                                 <div class="invalid-feedback">
                                     <?= form_error('fkamar_tersedia') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="ffoto">Foto Thumbnail</label>
-                                <input type="file" class="pt-1 form-control <?= form_error('ffoto') ? 'is-invalid' : '' ?>" id="ffoto" name="ffoto" value="<?= $this->input->post('ffoto'); ?>">
-                                <small class="text-muted">*Format file harus <i>jpg/png/gif/jpeg</i>, maksimal <i>file size 2Mb</i></small>
-                                <div class="invalid-feedback">
-                                    <?= form_error('ffoto') ?>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input type="hidden" value="<?= $kontrakan->thumbnail ?>" name="ffoto_lama">
+                                        <img src="<?= base_url('./uploads/thumbnail/') . $kontrakan->thumbnail ?>" alt="foto thumbnail" class="img-thumbnail" width="70%">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label for="ffoto">Ganti Foto Thumbnail</label>
+                                        <input type="file" class="pt-1 form-control <?= form_error('ffoto') ? 'is-invalid' : '' ?>" id="ffoto" name="ffoto" placeholder="Enter Harga Paket" value="<?= $this->input->post('ffoto'); ?>">
+                                        <small class="text-muted">*Format file harus <i>jpg/png/gif/jpeg</i>, maksimal <i>file size 2Mb</i></small>
+                                        <div class="invalid-feedback">
+                                            <?= form_error('ffoto') ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="fdeskripsi">Deskripsi</label>
-                                <textarea name="fdeskripsi" id="fdeskripsi" class="form-control <?= form_error('fdeskripsi') ? 'is-invalid' : '' ?>" cols="10" rows="10" placeholder="Enter Deskripsi Kontrakan"><?= $this->input->post('fdeskripsi'); ?></textarea>
+                                <textarea name="fdeskripsi" id="fdeskripsi" class="form-control <?= form_error('fdeskripsi') ? 'is-invalid' : '' ?>" cols="10" rows="10" placeholder="Enter Deskripsi Kontrakan"><?= $kontrakan->deskripsi ?></textarea>
                                 <div class="invalid-feedback">
                                     <?= form_error('fdeskripsi') ?>
                                 </div>
@@ -110,21 +121,21 @@
                             <div id='mapid' style="width: 100%; height: 300px;" class="mb-3"></div>
                             <div class="form-group">
                                 <label for="fjalan">Nama Jalan</label>
-                                <input type="text" class="form-control <?= form_error('fjalan') ? 'is-invalid' : '' ?>" id="fjalan" name="fjalan" placeholder="Nama jalan lokasi kontrakan" value="<?= $this->input->post('fjalan'); ?>">
+                                <input type="text" class="form-control <?= form_error('fjalan') ? 'is-invalid' : '' ?>" id="fjalan" name="fjalan" placeholder="Nama jalan lokasi kontrakan" value="<?= $kontrakan->jalan ?>">
                                 <div class="invalid-feedback">
                                     <?= form_error('fjalan') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="fkecamatan">Kecamatan</label>
-                                <input type="text" class="form-control <?= form_error('fkecamatan') ? 'is-invalid' : '' ?>" id="fkecamatan" name="fkecamatan" placeholder="Kecamatan kontrakan" value="<?= $this->input->post('fkecamatan'); ?>">
+                                <input type="text" class="form-control <?= form_error('fkecamatan') ? 'is-invalid' : '' ?>" id="fkecamatan" name="fkecamatan" placeholder="Kecamatan kontrakan" value="<?= $kontrakan->kecamatan ?>">
                                 <div class="invalid-feedback">
                                     <?= form_error('fkecamatan') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="fdeskripsi_alamat">Deskripsi Alamat</label>
-                                <textarea name="fdeskripsi_alamat" id="fdeskripsi_alamat" class="form-control <?= form_error('fdeskripsi_alamat') ? 'is-invalid' : '' ?>" cols="10" rows="5" placeholder="Enter Deskripsi Alamat"><?= $this->input->post('fdeskripsi_alamat'); ?></textarea>
+                                <textarea name="fdeskripsi_alamat" id="fdeskripsi_alamat" class="form-control <?= form_error('fdeskripsi_alamat') ? 'is-invalid' : '' ?>" cols="10" rows="5" placeholder="Enter Deskripsi Alamat"><?= $kontrakan->deskripsi_alamat ?></textarea>
                                 <div class="invalid-feedback">
                                     <?= form_error('fdeskripsi_alamat') ?>
                                 </div>
@@ -148,8 +159,8 @@
 <script type="text/javascript">
     // tangerang
     // -6.193935834961845, 106.49757328749318
-    var startlat = -6.193935834961845;
-    var startlon = 106.49757328749318;
+    var startlat = '<?php echo $kontrakan->lat ?>'
+    var startlon = '<?php echo $kontrakan->lon ?>'
 
     var options = {
         center: [startlat, startlon],
