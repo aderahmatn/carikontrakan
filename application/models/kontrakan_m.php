@@ -89,6 +89,10 @@ class kontrakan_m extends CI_Model
     {
         return $this->db->get_where($this->_table, ["id_kontrakan" => $id])->row();
     }
+    public function get_by_kecamatan($id)
+    {
+        return $this->db->get_where($this->_table, ["kecamatan" => $id])->result();
+    }
     public function add($post, $file)
     {
         $post = $this->input->post();

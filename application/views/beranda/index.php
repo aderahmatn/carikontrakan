@@ -4,7 +4,7 @@
         <p>
             cari kontrakan dengan harga, lokasi, dan tipe sesuai yang kamu mau hanya disini.
         </p>
-        <button class="btn btn-danger mt-3">Cari Sekarang</button>
+        <button class="btn btn-danger mt-3" onclick="search()">Cari Sekarang</button>
     </div>
     <div class="col-md-6 text-center mt-3">
         <div style="opacity: 0.2;">
@@ -163,146 +163,51 @@
     <div class="bg-red p-3 mt-n4">
         <h3 class="py-3 text-center">Gak perlu ribet, cukup masukan lokasi kontrakan yang kamu mau</h3>
         <div class="container text-center">
-            <input type="search" id="inputLokasi" class="form-control form-control-lg shadow" placeholder="Masukan lokasi / alamat">
-            <button class="btn btn-default btn-lg my-4 shadow rounded">Cari Kontrakan</button>
+            <form role="form" method="POST" action="<?= base_url('browse') ?>" autocomplete="off" enctype="multipart/form-data">
+                <select name="fkecamatan" id="fkecamatan" class="form-control form-control-lg shadow select-custom">
+                    <option hidden value="">Pilih area</option>
+                    <?php foreach ($kecamatan as $key) : ?>
+                        <option value="<?= $key->id_kecamatan ?>"><?= ucwords($key->kecamatan) ?></option>
+                    <?php endforeach ?>
+                </select>
+                <button class="btn btn-default btn-lg my-4 shadow rounded" type="submit">Cari Kontrakan</button>
+            </form>
         </div>
     </div>
-
-
     <h3 class="py-3">Rekomendasi kontrakan</h3>
     <div class="row ">
-        <div class="col-md-3">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="..." height="10%">
-                <div class="card-body">
-                    <span class="badge badge-secondary">Pria</span>
-                    <span class="badge badge-success">Tersedia 2 Kamar Tidur</span>
-                    <p class="card-text mt-2">Jln. kukun Kec. Curug Tangerang</p>
-                    <a href="#" class="btn btn-danger">Hubungi Pemilik</a>
+        <?php foreach ($kontrakan as $key) : ?>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="<?= base_url('./uploads/thumbnail/') . $key->thumbnail ?>" class="card-img-top" alt="..." height="10%">
+                    <div class="card-body">
+                        <h4><?= ucfirst($key->nama_kontrakan) ?></h4>
+                        <p><strong><?= rupiah($key->harga) ?></strong> per bulan</p>
+
+                        <span class="badge badge-secondary"><?= ucfirst($key->kategori) ?></span>
+                        <span class="badge badge-success"><?= ucfirst($key->kamar_tersedia) ?> kamar tersedia</span> <br>
+                        <p class="card-text mt-2"><?= ucfirst($key->deskripsi_alamat) ?></p>
+                        <a href="<?= base_url('booking/kontrakan/') . $key->id_kontrakan ?>" class="btn btn-danger">Pesan Kontrakan</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="..." height="10%">
-                <div class="card-body">
-                    <span class="badge badge-secondary">Pria</span>
-                    <span class="badge badge-success">Tersedia 2 Kamar Tidur</span>
-                    <p class="card-text mt-2">Jln. kukun Kec. Curug Tangerang</p>
-                    <a href="#" class="btn btn-danger">Hubungi Pemilik</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="card-img-top" alt="..." height="10%">
-                <div class="card-body">
-                    <span class="badge badge-secondary">Pria</span>
-                    <span class="badge badge-success">Tersedia 2 Kamar Tidur</span>
-                    <p class="card-text mt-2">Jln. kukun Kec. Curug Tangerang</p>
-                    <a href="#" class="btn btn-danger">Hubungi Pemilik</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=967&q=80" class="card-img-top" alt="..." height="10%">
-                <div class="card-body">
-                    <span class="badge badge-secondary">Pria</span>
-                    <span class="badge badge-success">Tersedia 2 Kamar Tidur</span>
-                    <p class="card-text mt-2">Jln. kukun Kec. Curug Tangerang</p>
-                    <a href="#" class="btn btn-danger">Hubungi Pemilik</a>
-                </div>
-            </div>
-        </div>
+        <?php endforeach ?>
 
     </div>
     <h3 class="mt-5 py-3 text-center">Area Kontrakan Terdekat Dengan Kamu</h3>
     <div class="row ">
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-body ">
-                    <h5 class="text-center m-0 font-weight-bold">Tigaraksa</h5>
-                </div>
+        <?php foreach ($kecamatan as $key) : ?>
+
+            <div class="col-md-2">
+                <a href="#">
+                    <div class="card card-area">
+                        <div class="card-body ">
+                            <h5 class="text-center m-0 font-weight-bold"><?= ucwords($key->kecamatan) ?></h5>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-body ">
-                    <h5 class="text-center m-0 font-weight-bold">Tigaraksa</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-body ">
-                    <h5 class="text-center m-0 font-weight-bold">Tigaraksa</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-body ">
-                    <h5 class="text-center m-0 font-weight-bold">Tigaraksa</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-body ">
-                    <h5 class="text-center m-0 font-weight-bold">Tigaraksa</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-body ">
-                    <h5 class="text-center m-0 font-weight-bold">Tigaraksa</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-body ">
-                    <h5 class="text-center m-0 font-weight-bold">Tigaraksa</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-body ">
-                    <h5 class="text-center m-0 font-weight-bold">Tigaraksa</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-body ">
-                    <h5 class="text-center m-0 font-weight-bold">Tigaraksa</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-body ">
-                    <h5 class="text-center m-0 font-weight-bold">Tigaraksa</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-body ">
-                    <h5 class="text-center m-0 font-weight-bold">Tigaraksa</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-body ">
-                    <h5 class="text-center m-0 font-weight-bold">Tigaraksa</h5>
-                </div>
-            </div>
-        </div>
+        <?php endforeach ?>
     </div>
     <div class="row bg-red mt-5">
         <div class="col-md-6">
@@ -398,3 +303,9 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    function search() {
+        location.replace("<?= base_url('browse') ?>")
+    }
+</script>

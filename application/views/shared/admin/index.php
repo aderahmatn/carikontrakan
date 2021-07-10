@@ -89,6 +89,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('booking/list') ?>" class="nav-link <?= $this->uri->segment(1) == 'booking' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
+                                <i class="nav-icon fab fa-keycdn"></i>
+                                <p>
+                                    Daftar Booking
+                                </p>
+                            </a>
+                        </li>
 
                         <li class="nav-item">
                             <a href="<?php echo base_url('admin') ?>" class="nav-link <?= $this->uri->segment(1) == 'admin' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">

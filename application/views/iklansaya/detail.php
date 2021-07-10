@@ -24,7 +24,6 @@
             <!-- form start -->
             <form role="form" method="POST" action="" autocomplete="off" enctype="multipart/form-data">
                 <input type="hidden" value="<?= $kontrakan->id_kontrakan ?>" name="fid_kontrakan">
-
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">

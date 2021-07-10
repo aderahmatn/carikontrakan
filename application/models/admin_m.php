@@ -15,19 +15,14 @@ class admin_m extends CI_Model
     {
         return [
             [
-                'field' => 'fnama_user',
+                'field' => 'fnama_admin',
                 'label' => 'Nama Lengkap',
                 'rules' => 'required'
             ],
             [
                 'field' => 'femail',
                 'label' => 'Email',
-                'rules' => 'required|valid_email|is_unique[users.email]'
-            ],
-            [
-                'field' => 'fhandphone',
-                'label' => 'No Handphone',
-                'rules' => 'required'
+                'rules' => 'required|valid_email|is_unique[admins.email]'
             ],
             [
                 'field' => 'fpassword',
@@ -45,7 +40,7 @@ class admin_m extends CI_Model
     {
         return [
             [
-                'field' => 'fnama_user',
+                'field' => 'fnama_admin',
                 'label' => 'Nama Lengkap',
                 'rules' => 'required'
             ],
@@ -54,13 +49,9 @@ class admin_m extends CI_Model
                 'label' => 'Email',
                 'rules' => 'required|valid_email'
             ],
-            [
-                'field' => 'fhandphone',
-                'label' => 'No Handphone',
-                'rules' => 'required'
-            ],
         ];
     }
+
 
     public function get_all()
     {
@@ -76,24 +67,22 @@ class admin_m extends CI_Model
     public function add()
     {
         $post = $this->input->post();
-        $this->nama_user = $post['fnama_user'];
+        $this->nama_admin = $post['fnama_admin'];
         $this->email = $post['femail'];
-        $this->handphone = $post['fhandphone'];
         $this->password = md5($post['fpassword']);
         $this->db->insert($this->_table, $this);
     }
     public function Delete($id)
     {
-        $this->db->where('id_user', $id);
+        $this->db->where('id_admin', $id);
         $this->db->delete($this->_table);
     }
     public function update($post)
     {
         $post = $this->input->post();
-        $this->db->set('nama_user', $post['fnama_user']);
+        $this->db->set('nama_admin', $post['fnama_admin']);
         $this->db->set('email', $post['femail']);
-        $this->db->set('hanphone', $post['fhandphone']);
-        $this->db->where('id_user', $post['fid_user']);
+        $this->db->where('id_admin', $post['fid_admin']);
         $this->db->update($this->_table);
     }
     public function login($post)

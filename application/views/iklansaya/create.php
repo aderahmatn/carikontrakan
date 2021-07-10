@@ -116,8 +116,13 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="fkecamatan">Kecamatan</label>
-                                <input type="text" class="form-control <?= form_error('fkecamatan') ? 'is-invalid' : '' ?>" id="fkecamatan" name="fkecamatan" placeholder="Kecamatan kontrakan" value="<?= $this->input->post('fkecamatan'); ?>">
+                                <label for="fkecamatan">Pemilik Kontrakan</label>
+                                <select class="form-control <?php echo form_error('fkecamatan') ? 'is-invalid' : '' ?>" id="fkecamatan" name="fkecamatan">
+                                    <option hidden value="" selected>Pilih Kecamatan</option>
+                                    <?php foreach ($kecamatan as $key) : ?>
+                                        <option value="<?= $key->id_kecamatan ?>" <?= $this->input->post('fkecamatan') == $key->id_kecamatan ? 'selected' : '' ?>><?= $key->kecamatan ?></option>
+                                    <?php endforeach ?>
+                                </select>
                                 <div class="invalid-feedback">
                                     <?= form_error('fkecamatan') ?>
                                 </div>

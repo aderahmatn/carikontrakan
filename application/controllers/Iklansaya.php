@@ -10,6 +10,7 @@ class Iklansaya extends CI_Controller
         check_not_login_admin();
         $this->load->model('kontrakan_m');
         $this->load->model('pemilik_m');
+        $this->load->model('kecamatan_m');
     }
 
 
@@ -30,6 +31,7 @@ class Iklansaya extends CI_Controller
         $validation->set_rules($kontrakan->rules());
         if ($validation->run() == FALSE) {
             $data['pemilik'] = $this->pemilik_m->get_all();
+            $data['kecamatan'] = $this->kecamatan_m->get_all();
             $this->template->load('shared/admin/index', 'iklansaya/create', $data);
         } else {
             $post = $this->input->post(null, TRUE);
@@ -42,6 +44,7 @@ class Iklansaya extends CI_Controller
             if (!$this->upload->do_upload('ffoto')) {
                 $this->session->set_flashdata('error', 'Foto Thumbnail harap diisi!');
                 $data['pemilik'] = $this->pemilik_m->get_all();
+                $data['kecamatan'] = $this->kecamatan_m->get_all();
                 $this->template->load('shared/admin/index', 'iklansaya/create', $data);
             } else {
                 $data = $this->upload->data();
@@ -72,6 +75,7 @@ class Iklansaya extends CI_Controller
                     $this->upload->display_errors();
                     $this->session->set_flashdata('error', 'Data kontrakan gagal diupdate!');
                     $data['pemilik'] = $this->pemilik_m->get_all();
+                    $data['kecamatan'] = $this->kecamatan_m->get_all();
                     $this->template->load('shared/admin/index', 'iklansaya/index', $data);
                 } else {
                     $data = $this->upload->data();
@@ -103,6 +107,7 @@ class Iklansaya extends CI_Controller
             redirect('iklansaya', 'refresh');
         }
         $data['pemilik'] = $this->pemilik_m->get_all();
+        $data['kecamatan'] = $this->kecamatan_m->get_all();
         $this->template->load('shared/admin/index', 'iklansaya/edit', $data);
     }
 

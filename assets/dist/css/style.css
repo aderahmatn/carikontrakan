@@ -10,6 +10,11 @@ body{
 .card-img-top{
      height: 337px; object-fit: cover;
 }
+.img-booking{
+     height: 755px; 
+     width: 660px;
+     object-fit: cover;
+}
 .bg-nude{
     background-color: #fab2c2;
 }
@@ -379,4 +384,26 @@ section{
 }
 a:hover{
     color: #7e001b;
+}
+
+.result{
+    cursor: pointer;
+}
+.select-custom{
+    appearance: none;
+}
+.img-list{
+    height: 200px;
+    width: 250px;
+    object-fit: cover;
+}
+.card-area{
+    color: black;
+}
+.card-area:hover{
+transform: translateY(-2px);
+color: red;
+}
+.img-detail:hover{
+cursor: pointer;
 }

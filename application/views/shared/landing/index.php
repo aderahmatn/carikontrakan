@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="<?= base_url() . 'assets/plugins/sweetalert2/dark.css' ?>">
     <!-- Toastr -->
     <link rel="stylesheet" href="<?= base_url() . 'assets/plugins/toastr/toastr.min.css' ?>">
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+    <!-- Google Font: Source Sans Pro -->
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- REQUIRED SCRIPTS -->
@@ -52,8 +56,8 @@
                         <li class="nav-item <?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
                             <a class="nav-link" href="<?= base_url() ?>">Beranda <span class="sr-only"></a>
                         </li>
-                        <li class="nav-item <?= $this->uri->segment(1) == 'tentang_saya' ? 'active' : '' ?>">
-                            <a class="nav-link" href="<?= base_url('tentang_saya') ?>">Kontrakan</a>
+                        <li class="nav-item <?= $this->uri->segment(1) == 'browse' ? 'active' : '' ?>">
+                            <a class="nav-link" href="<?= base_url('browse') ?>">Kontrakan</a>
                         </li>
                         <li class="nav-item border mr-4 ml-2 border-light my-1 rounded"></li>
 
@@ -66,12 +70,8 @@
                                     <i class="fas fa-user-circle mr-3 ml-n2 fa-lg"></i><?= ucfirst($this->session->userdata('nama_user')) ?>
                                 </a>
                                 <div class="dropdown-menu bg-red">
-                                    <a href="<?= base_url('dashboard') ?>" class="dropdown-item text-white">
-                                        <i class="fas fa-user mr-2"></i> Profile Saya
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="<?= base_url('dashboard') ?>" class="dropdown-item text-white">
-                                        <i class="fas fa-door-open mr-2"></i> Kontrakan Saya
+                                    <a href="<?= base_url('booking/mylist/') . $this->session->userdata('id_user') ?>" class="dropdown-item text-white ">
+                                        <i class="fas fa-door-open mr-2"></i> Pemesanan Kontrakan
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     <a href="#" class="dropdown-item text-white" data-toggle="modal" data-target="#modal-logout">
