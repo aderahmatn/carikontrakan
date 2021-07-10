@@ -159,6 +159,7 @@
         </div>
     </div>
 </div>
+<?= date('d/m/Y') ?>
 <div class="mx-md-4 mt-4">
     <div class="bg-red p-3 mt-n4">
         <h3 class="py-3 text-center">Gak perlu ribet, cukup masukan lokasi kontrakan yang kamu mau</h3>
@@ -199,13 +200,16 @@
         <?php foreach ($kecamatan as $key) : ?>
 
             <div class="col-md-2">
-                <a href="#">
-                    <div class="card card-area">
-                        <div class="card-body ">
-                            <h5 class="text-center m-0 font-weight-bold"><?= ucwords($key->kecamatan) ?></h5>
+                <form role="form" method="POST" action="<?= base_url('browse') ?>" autocomplete="off" enctype="multipart/form-data">
+                    <input type="hidden" name="fkecamatan" value="<?= $key->id_kecamatan ?>">
+                    <button class=" btn btn-block" type="submit">
+                        <div class="card card-area">
+                            <div class="card-body ">
+                                <h5 class="text-center m-0 font-weight-bold"><?= ucwords($key->kecamatan) ?></h5>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </button>
+                </form>
             </div>
         <?php endforeach ?>
     </div>
@@ -305,7 +309,7 @@
 </div>
 
 <script type="text/javascript">
-    function search() {
-        location.replace("<?= base_url('browse') ?>")
+    function goTo(url) {
+        location.replace(url)
     }
 </script>

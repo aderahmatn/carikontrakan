@@ -69,7 +69,7 @@
                                 <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="true">
                                     <i class="fas fa-user-circle mr-3 ml-n2 fa-lg"></i><?= ucfirst($this->session->userdata('nama_user')) ?>
                                 </a>
-                                <div class="dropdown-menu bg-red">
+                                <div class="dropdown-menu dropdown-menu-right bg-red">
                                     <a href="<?= base_url('booking/mylist/') . $this->session->userdata('id_user') ?>" class="dropdown-item text-white ">
                                         <i class="fas fa-door-open mr-2"></i> Pemesanan Kontrakan
                                     </a>

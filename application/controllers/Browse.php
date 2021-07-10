@@ -10,6 +10,7 @@ class Browse extends CI_Controller
         $this->load->model('kontrakan_m');
         $this->load->model('kecamatan_m');
     }
+
     public function index()
     {
         $kecamatan  = $this->kecamatan_m;
@@ -18,13 +19,13 @@ class Browse extends CI_Controller
         if ($validation->run() == FALSE) {
             $data['kecamatan'] = $this->kecamatan_m->get_all();
             $data['kontrakan'] = $this->kontrakan_m->get_all();
+            $data['kecamatanDipilih'] = null;
             $this->template->load('shared/landing/index', 'browse/index', $data);
         } else {
             $id = $this->input->post('fkecamatan');
             $data['kecamatan'] = $this->kecamatan_m->get_all();
             $data['kontrakan'] = $this->kontrakan_m->get_by_kecamatan($id);
-            $data['kecamatanDipilih']
-                = $this->input->post('fkecamatan');
+            $data['kecamatanDipilih'] = $this->input->post('fkecamatan');
             if ($data['kontrakan']) {
                 $this->template->load('shared/landing/index', 'browse/index', $data);
             } else {

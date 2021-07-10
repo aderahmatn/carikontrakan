@@ -48,12 +48,12 @@
                 <textarea class="form-control" rows="3" id="noteText"></textarea>
             </div>
             <button onclick="rejectConfirmationClose()" class="btn btn-default float-left mr-3"> Batal</button>
-            <button onclick="submitReject('<?= base_url('booking/update/') . $pesanan->id_pesanan . '/ditolak/' ?>')" class="btn btn-danger float-right mr-3"><i class="fas fa-times"></i> Tolak</button>
+            <button onclick="submitReject('<?= base_url('booking/update/') . $pesanan->id_pesanan . '/ditolak/' ?>', '<?= $pesanan->id_kontrakan . '/' . $pesanan->kamar_tersedia ?>')" class="btn btn-danger float-right mr-3"><i class="fas fa-times"></i> Tolak</button>
         </div>
         <div class="col-12" id="footerButton">
             <a href="<?= base_url('booking/list') ?>" class="btn btn-default"><i class="fas fa-chevron-left"></i> Kembali</a>
             <?php if ($pesanan->status_pemesanan == "menunggu konfirmasi") : ?>
-                <a href="<?= base_url('booking/update/') . $pesanan->id_pesanan . '/terkonfirmasi/pesanan terkonfirmasi' ?>" class="btn btn-success float-right"><i class="fas fa-check"></i> Konfirmasi</a>
+                <a href="<?= base_url('booking/update/') . $pesanan->id_pesanan . '/terkonfirmasi/pesanan terkonfirmasi/' . $pesanan->id_kontrakan . '/' . ($pesanan->kamar_tersedia - 1) ?>" class="btn btn-success float-right"><i class="fas fa-check"></i> Konfirmasi</a>
                 <button onclick="rejectConfirmation()" class="btn btn-danger float-right mr-3"><i class="fas fa-times"></i> Tolak</button>
             <?php endif ?>
 
@@ -79,8 +79,8 @@
         $('#footerButton').show()
     }
 
-    function submitReject(url) {
+    function submitReject(url, kontrakan) {
         var note = $('#noteText').val()
-        location.href = url + note;
+        location.href = url + note + '/' + kontrakan;
     }
 </script>

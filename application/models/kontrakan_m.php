@@ -135,6 +135,12 @@ class kontrakan_m extends CI_Model
         $this->db->where('id_kontrakan', $post['fid_kontrakan']);
         $this->db->update($this->_table);
     }
+    public function update_kamar($id, $sisa)
+    {
+        $this->db->set('kamar_tersedia', $sisa);
+        $this->db->where('id_kontrakan', $id);
+        $this->db->update($this->_table);
+    }
 }
 
 /* End of file kontrakan_m.php */

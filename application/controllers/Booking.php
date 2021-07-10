@@ -62,12 +62,12 @@ class Booking extends CI_Controller
         $data['pesanan'] = $this->booking_m->get_by_user($id);
         $this->template->load('shared/landing/index', 'booking/mylist', $data);
     }
-    public function update($id, $status, $note)
+    public function update($id, $status, $note,  $idKontrakan, $sisa)
     {
-
         check_not_login_admin();
         if (!isset($id)) redirect('booking/list');
         if ($id && $status) {
+            $this->kontrakan_m->update_kamar($idKontrakan, $sisa);
             $this->booking_m->update_status($id, $status, $note);
             if ($this->db->affected_rows() > 0) {
                 $this->session->set_flashdata('success', 'Pesanan Berhasil Diupdate!');

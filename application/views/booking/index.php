@@ -17,6 +17,7 @@
             <form role="form" method="POST" action="<?= base_url('booking/submit_pesanan/') . $kontrakan->id_kontrakan ?>" autocomplete="off" enctype="multipart/form-data">
                 <input type="hidden" name="fid_user" value="<?= $this->session->userdata('id_user') ?>">
                 <input type="hidden" name="fid_kontrakan" value="<?= $kontrakan->id_kontrakan ?>">
+                <input type="hidden" name="ftanggal_pesanan" value="<?= date('y-m-d') ?>">
                 <div class="card-body">
                     <div class="form-group">
                         <label for="fnama_kontrakan">Nama Lengkap</label>

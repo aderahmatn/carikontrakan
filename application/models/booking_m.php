@@ -30,7 +30,7 @@ class booking_m extends CI_Model
         $this->id_user = $post['fid_user'];
         $this->id_kontrakan = $post['fid_kontrakan'];
         $this->tgl_masuk = $post['ftanggal_masuk'];
-        $this->tgl_pesanan = date('d/m/y');
+        $this->tgl_pesanan = $post['ftanggal_pesanan'];
         $this->status_pemesanan = 'menunggu konfirmasi';
         $this->bukti_bayar = $file;
         $this->db->insert($this->_table, $this);

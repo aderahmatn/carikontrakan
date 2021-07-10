@@ -11,51 +11,56 @@
                     <!-- /.card-header -->
                     <!-- card-body -->
                     <div class="card-body">
-                        <table id="TabelUser" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th style="width: 10px">No</th>
-                                    <th>Nama User</th>
-                                    <th>Handphone</th>
-                                    <th>Tgl Booking</th>
-                                    <th>Kontrakan</th>
-                                    <th>Tgl Masuk</th>
-                                    <th>Bukti Pembayaran</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $no = 1;
-                                foreach ($pesanan as $key) : ?>
+                        <?php if (!$pesanan) { ?>
+                            <div class="alert alert-danger text-center alert-block">Anda belum melakukan pemesanan kontrakan</div>
+                        <?php } else { ?>
+                            <table id="TabelUser" class="table table-bordered table-striped">
+                                <thead>
                                     <tr>
-                                        <td><?= $no++ ?></td>
-                                        <td><?= $key->nama_user ?></td>
-                                        <td><?= $key->handphone ?></td>
-                                        <td><?= $key->tgl_pesanan ?></td>
-                                        <td><?= $key->nama_kontrakan ?></td>
-                                        <td><?= $key->tgl_masuk ?></td>
-                                        <td class="text-center">
-                                            <img src="<?= base_url('./uploads/bukti_bayar/') . $key->bukti_bayar ?>" alt="foto bukti bayar" width="50" class="img-thumbnail img-detail" onclick="fotoDetail('<?= $key->id_pesanan ?>')">
-                                        </td>
-                                        <td><?= status($key->status_pemesanan) ?></td>
+                                        <th style="width: 10px">No</th>
+                                        <th>Nama User</th>
+                                        <th>Handphone</th>
+                                        <th>Tgl Booking</th>
+                                        <th>Kontrakan</th>
+                                        <th>Tgl Masuk</th>
+                                        <th>Bukti Pembayaran</th>
+                                        <th>Status</th>
                                     </tr>
-                                    <!--foto modal-->
-                                    <div class="modal fade" id="fotoModal<?= $key->id_pesanan ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    <img src="<?= base_url('./uploads/bukti_bayar/') . $key->bukti_bayar ?>" alt="foto bukti bayar" width="100%">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-default" type="button" data-dismiss="modal"> Close</button>
+                                </thead>
+                                <tbody>
+                                    <?php $no = 1;
+                                    foreach ($pesanan as $key) : ?>
+                                        <tr>
+                                            <td><?= $no++ ?></td>
+                                            <td><?= $key->nama_user ?></td>
+                                            <td><?= $key->handphone ?></td>
+                                            <td><?= $key->tgl_pesanan ?></td>
+                                            <td><?= $key->nama_kontrakan ?></td>
+                                            <td><?= $key->tgl_masuk ?></td>
+                                            <td class="text-center">
+                                                <img src="<?= base_url('./uploads/bukti_bayar/') . $key->bukti_bayar ?>" alt="foto bukti bayar" width="50" class="img-thumbnail img-detail" onclick="fotoDetail('<?= $key->id_pesanan ?>')">
+                                            </td>
+                                            <td><?= status($key->status_pemesanan) ?></td>
+                                        </tr>
+                                        <!--foto modal-->
+                                        <div class="modal fade" id="fotoModal<?= $key->id_pesanan ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <img src="<?= base_url('./uploads/bukti_bayar/') . $key->bukti_bayar ?>" alt="foto bukti bayar" width="100%">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-default" type="button" data-dismiss="modal"> Close</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                <?php endforeach ?>
+                                    <?php endforeach ?>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        <?php } ?>
+
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
