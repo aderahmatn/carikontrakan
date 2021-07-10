@@ -4,14 +4,14 @@
 -- https://tableplus.com/
 --
 -- Database: carikontrakan
--- Generation Time: 2021-07-07 8:50:47.5710 AM
+-- Generation Time: 2021-07-10 4:03:07.5950 PM
 -- -------------------------------------------------------------
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
@@ -77,9 +77,11 @@ CREATE TABLE `pesanan` (
   `tgl_masuk` date DEFAULT NULL,
   `tgl_pesanan` date DEFAULT NULL,
   `bukti_bayar` text,
+  `status_pemesanan` varchar(100) DEFAULT NULL,
+  `note` text,
   PRIMARY KEY (`id_pesanan`),
   UNIQUE KEY `id_pesanan` (`id_pesanan`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 CREATE TABLE `users` (
   `id_user` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -89,7 +91,7 @@ CREATE TABLE `users` (
   `password` text,
   PRIMARY KEY (`id_user`),
   UNIQUE KEY `id_user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO `admins` (`id_admin`, `nama_admin`, `email`, `password`) VALUES
 ('1', 'admin carikontrakan', 'admin@carikontrakan.com', '21232f297a57a5a743894a0e4a801fc3'),
@@ -116,7 +118,7 @@ INSERT INTO `kecamatan` (`id_kecamatan`, `kecamatan`) VALUES
 ('18', 'sepatan');
 
 INSERT INTO `kontrakan` (`id_kontrakan`, `nama_kontrakan`, `kategori`, `deskripsi`, `id_admin`, `id_owner`, `kamar_tersedia`, `harga`, `thumbnail`, `jalan`, `kecamatan`, `deskripsi_alamat`, `lat`, `lon`) VALUES
-('k60e1baa907365', 'kost batu kencana', 'wanita', 'j0D2QrB7fn', NULL, '6', '10', '700000', 'img-60e1baa903d83.jpg', 'nbC3LapzSf', '1', 'mFOqifopeJ', '-6.19603397', '106.46088620'),
+('k60e1baa907365', 'kost batu kencana', 'wanita', 'j0D2QrB7fn', NULL, '6', '9', '700000', 'img-60e1baa903d83.jpg', 'nbC3LapzSf', '1', 'mFOqifopeJ', '-6.19603397', '106.46088620'),
 ('k60e1bad926ace', 'kost waringin', 'wanita', 'AduO6TpVqf', NULL, '7', '10', '600000', 'img-60e1bad9257fe.jpg', 'Iym0D33fbE', '1', 'Lhh7FtVSRl', '-6.19476430', '106.46403192'),
 ('k60e1bb1f3ec42', 'kost annapurna', 'wanita', '9XxYexfBmq', NULL, '8', '10', '750000', 'img-60e1bb1f3e028.jpg', 'xWQ7tLY0i3', '1', 'Cxry8gQT7k', '-6.19587337', '106.45996903'),
 ('k60e1bb54aa4b9', 'kost ibu asep', 'wanita', 'avX3oOweDr', NULL, '9', '10', '750000', 'img-60e1bb54a9600.jpeg', 'LVZuBvFL8Y', '1', 'pRZnBnPNp6', '-6.19767406', '106.45559681'),
@@ -135,14 +137,17 @@ INSERT INTO `owners` (`id_owner`, `nama_owner`, `handphone`, `email`, `alamat`) 
 ('12', 'windah irushi', '08999283132', 'windah@gmail.com', 'tangerang'),
 ('13', 'entin karsih', '08983231322', 'entin@gmail.com', 'tangerang');
 
-INSERT INTO `pesanan` (`id_pesanan`, `id_user`, `id_kontrakan`, `tgl_masuk`, `tgl_pesanan`, `bukti_bayar`) VALUES
-('1', '3', 'k60e1baa907365', '2021-07-06', '2004-07-21', 'img-60e1a527b53cb.JPG'),
-('2', '3', 'k60e1bb54aa4b9', '2021-07-15', '2004-07-21', 'img-60e1aafe3009b.png'),
-('3', '3', 'k60e1bbabeeab8', '2021-07-12', '2004-07-21', 'img-60e1ab2c4925e.png');
+INSERT INTO `pesanan` (`id_pesanan`, `id_user`, `id_kontrakan`, `tgl_masuk`, `tgl_pesanan`, `bukti_bayar`, `status_pemesanan`, `note`) VALUES
+('11', '3', 'k60e1baa907365', '2021-07-15', '2021-07-10', 'img-60e9504894761.jpg', 'terkonfirmasi', 'pesanan terkonfirmasi'),
+('12', '4', 'k60e1bbabeeab8', '2021-07-31', '2021-07-10', 'img-60e9507212657.jpg', 'terkonfirmasi', 'pesanan terkonfirmasi'),
+('13', '4', 'k60e1bbabeeab8', '2021-07-31', '2021-07-09', 'img-60e9507212657.jpg', 'ditolak', 'pembayaran kurang'),
+('14', '3', 'k60e1baa907365', '2021-07-15', '2021-07-08', 'img-60e9504894761.jpg', 'ditolak', 'pembayaran palsu'),
+('15', '3', 'k60e1baa907365', '2021-07-15', '2021-07-07', 'img-60e9504894761.jpg', 'terkonfirmasi', 'pesanan terkonfirmasi');
 
 INSERT INTO `users` (`id_user`, `nama_user`, `handphone`, `email`, `password`) VALUES
 ('1', 'KQpbeVv58q', NULL, 'nowot@qnyu.com', 'c1a65695971551592b1db034ae39dc52'),
-('3', 'ade rahmat nurdiyana', '087776451664', 'nurdiyana.ade@gmail.com', '21232f297a57a5a743894a0e4a801fc3');
+('3', 'ade rahmat nurdiyana', '087776451664', 'nurdiyana.ade@gmail.com', '21232f297a57a5a743894a0e4a801fc3'),
+('4', 'william', '08111231728', 'william@gmail.com', '21232f297a57a5a743894a0e4a801fc3');
 
 
 
