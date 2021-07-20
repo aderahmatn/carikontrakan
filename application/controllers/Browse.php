@@ -20,6 +20,7 @@ class Browse extends CI_Controller
             $data['kecamatan'] = $this->kecamatan_m->get_all();
             $data['kontrakan'] = $this->kontrakan_m->get_all();
             $data['kecamatanDipilih'] = null;
+            $data['title'] = 'Rekomendasi Kontrakan :';
             $this->template->load('shared/landing/index', 'browse/index', $data);
         } else {
             $id = $this->input->post('fkecamatan');
@@ -27,13 +28,15 @@ class Browse extends CI_Controller
             $data['kontrakan'] = $this->kontrakan_m->get_by_kecamatan($id);
             $data['kecamatanDipilih'] = $this->input->post('fkecamatan');
             if ($data['kontrakan']) {
+                $data['title'] = 'Hasil pencarian kontrakan :';
                 $this->template->load('shared/landing/index', 'browse/index', $data);
             } else {
-                $this->session->set_flashdata('warning', 'Kontrakan belum tersedia diarea tersebut');
                 $data['kecamatan'] = $this->kecamatan_m->get_all();
                 $data['kontrakan'] = $this->kontrakan_m->get_all();
                 $data['kecamatanDipilih']
                     = $this->input->post('fkecamatan');
+                $data['title'] = 'Rekomendasi Kontrakan :';
+                $this->session->set_flashdata('warning', 'Kontrakan belum tersedia diarea tersebut');
                 $this->template->load('shared/landing/index', 'browse/index', $data);
             }
         }

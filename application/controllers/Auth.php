@@ -98,7 +98,7 @@ class Auth extends CI_Controller
             'no_handphone',
         );
         $this->session->unset_userdata($params);
-        redirect('auth/login', 'refresh');
+        redirect('beranda', 'refresh');
     }
 }
 

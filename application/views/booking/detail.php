@@ -33,11 +33,53 @@
     <!-- /.row -->
 
 
-    <div class="row mb-4">
-        <b>Bukti Pembayaran</b>
-        <div class="col-md-12">
-            <img src="<?= base_url('./uploads/bukti_bayar/') . $pesanan->bukti_bayar ?>" alt="foto bukti bayar" width="30%" class="img-thumbnail img-detail">
+    <div class="row">
+        <div class="col-12 table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Kode booking</th>
+                        <th>Tanggal Pembayaran</th>
+                        <th>Nama Rekening</th>
+                        <th>Rekening Pengirim</th>
+                        <th>Rekening Tujuan</th>
+                        <th>Bukti Pembayaran</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if ($pesanan->tgl_bayar == null) { ?>
+                        <tr>
+                            <td colspan="6" class="text-center">Anda belum melakukan konfrimasi pembayaran</td>
+                        </tr>
+                    <?php } else { ?>
+                        <tr>
+                            <td><?= $pesanan->kode_booking ?></td>
+                            <td><?= $pesanan->tgl_bayar ?></td>
+                            <td><?= $pesanan->nama_rekening_pengirim ?></td>
+                            <td><?= $pesanan->no_rekening_pengirim ?></td>
+                            <td><?= $pesanan->rekening_tujuan ?></td>
+                            <td class="text-center">
+                                <img src="<?= base_url('./uploads/bukti_bayar/') . $pesanan->bukti_bayar ?>" alt="foto bukti bayar" width="90" class="img-thumbnail img-detail" onclick="fotoDetail('<?= $pesanan->id_pesanan ?>')">
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
         </div>
+        <!--foto modal-->
+        <div class="modal fade" id="fotoModal<?= $pesanan->id_pesanan ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="<?= base_url('./uploads/bukti_bayar/') . $pesanan->bukti_bayar ?>" alt="foto bukti bayar" width="100%">
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" data-dismiss="modal"> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
     </div>
 
     <!-- this row will not appear when printing -->
@@ -53,7 +95,7 @@
         <div class="col-12" id="footerButton">
             <a href="<?= base_url('booking/list') ?>" class="btn btn-default"><i class="fas fa-chevron-left"></i> Kembali</a>
             <?php if ($pesanan->status_pemesanan == "menunggu konfirmasi") : ?>
-                <a href="<?= base_url('booking/update/') . $pesanan->id_pesanan . '/terkonfirmasi/pesanan terkonfirmasi/' . $pesanan->id_kontrakan . '/' . ($pesanan->kamar_tersedia - 1) ?>" class="btn btn-success float-right"><i class="fas fa-check"></i> Konfirmasi</a>
+                <a href="<?= base_url('booking/update/') . $pesanan->id_pesanan . '/konfirmasi/pesanan sudah di konfirmasi/' . $pesanan->id_kontrakan . '/' . ($pesanan->kamar_tersedia - 1) ?>" class="btn btn-success float-right"><i class="fas fa-check"></i> Konfirmasi</a>
                 <button onclick="rejectConfirmation()" class="btn btn-danger float-right mr-3"><i class="fas fa-times"></i> Tolak</button>
             <?php endif ?>
 
@@ -77,6 +119,11 @@
     function rejectConfirmationClose() {
         $('#note').hide()
         $('#footerButton').show()
+    }
+
+    function fotoDetail(id) {
+
+        $('#fotoModal' + id).modal();
     }
 
     function submitReject(url, kontrakan) {

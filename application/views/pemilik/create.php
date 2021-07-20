@@ -55,7 +55,6 @@
 
                 </div>
 
-
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
@@ -65,7 +64,6 @@
         </form>
     </div>
     <!-- /.card -->
-</div>
 </div>
 
 <script type="text/javascript">

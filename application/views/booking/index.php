@@ -14,60 +14,36 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form" method="POST" action="<?= base_url('booking/submit_pesanan/') . $kontrakan->id_kontrakan ?>" autocomplete="off" enctype="multipart/form-data">
+            <form role="form" method="POST" action="<?= base_url('booking/submit_pesanan/') . $kontrakan->id_kontrakan . '/' . 'B' . $kode_booking ?>" autocomplete="off" enctype="multipart/form-data">
                 <input type="hidden" name="fid_user" value="<?= $this->session->userdata('id_user') ?>">
+                <input type="hidden" name="fkode_booking" value="<?= 'B' . $kode_booking ?>">
                 <input type="hidden" name="fid_kontrakan" value="<?= $kontrakan->id_kontrakan ?>">
                 <input type="hidden" name="ftanggal_pesanan" value="<?= date('y-m-d') ?>">
+
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="fnama_kontrakan">Nama Lengkap</label>
-                        <input type="text" class="form-control <?= form_error('fnama_pemilik') ? 'is-invalid' : '' ?>" id="fnama_pemilik" name="fnama_pemilik" placeholder="Nama pemiliik kontrakan" value="<?= $this->session->userdata('nama_user') ?>" disabled>
+                        <label for="fnama_kontrakan">Nama Pemesan</label>
+                        <input type="text" class="form-control <?= form_error('fnama_pemilik') ? 'is-invalid' : '' ?>" id="fnama_pemesan" name="fnama_pemesan" placeholder="Nama Pemesan Kontrakan" value="<?= $this->session->userdata('nama_user') ?>" <?= !$this->session->userdata('id_user') ? 'disabled' : '' ?>>
                         <div class="invalid-feedback">
-                            <?= form_error('fnama_pemilik') ?>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="ftanggal_masuk">Tanggal mulai menempati</label>
-                        <input type="date" class="form-control <?= form_error('ftanggal_masuk') ? 'is-invalid' : '' ?>" id="ftanggal_masuk" name="ftanggal_masuk" placeholder="Tanggal mulai menempati" value="<?= $this->input->post('ftanggal_masuk'); ?>">
-                        <div class="invalid-feedback">
-                            <?= form_error('ftanggal_masuk') ?>
-                        </div>
-                    </div>
-                    <hr>
-                    <strong>Silahkan melakukan pembayaran DP ke rekening dibawah ini, untuk memesan kontrakan ini</strong>
-                    <div class="row mt-3 p-2 border d-flex align-items-center">
-                        <div class="col-md-6"><strong>Jumlah bayar : </strong></div>
-                        <div class="col-md-6 ">
-                            <p class="m-0"><?= rupiah($kontrakan->harga) ?></p>
-                        </div>
-                    </div>
-                    <div class="row mt-3 p-2 border d-flex align-items-center">
-                        <div class="col-md-6"><img src="<?= base_url('assets/images/bank/bank-bca.png') ?>" alt="bca" width="150"></div>
-                        <div class="col-md-6 ">
-                            <p class="m-0">A/N Cari Kontrakan</p>
-                            <p class="m-0">2132 3231 9038 1231</p>
+                            <?= form_error('fnama_pemesan') ?>
                         </div>
                     </div>
 
-                    <div class="row my-3 p-2 border d-flex align-items-center">
-                        <div class="col-md-6"><img src="<?= base_url('assets/images/bank/bank-mandiri.png') ?>" alt="mandiri" width="150"></div>
-                        <div class="col-md-6">
-                            <p class="m-0">A/N Cari Kontrakan</p>
-                            <p class="m-0">2132 3231 9038 1231</p>
-                        </div>
-                    </div>
                     <div class="form-group">
-                        <label for="ffoto">Bukti Transfer</label>
-                        <input type="file" class="pt-1 form-control <?= form_error('ffoto') ? 'is-invalid' : '' ?>" id="ffoto" name="ffoto" value="<?= $this->input->post('ffoto'); ?>">
-                        <small class="text-muted">*Format file harus <i>jpg/png/gif/jpeg</i>, maksimal <i>file size 2Mb</i></small>
+                        <label for="ftanggal_masuk">Tanggal mulai menempati</label>
+                        <input type="date" class="form-control <?= form_error('ftanggal_masuk') ? 'is-invalid' : '' ?>" id="ftanggal_masuk" name="ftanggal_masuk" placeholder="Tanggal mulai menempati" value="<?= $this->input->post('ftanggal_masuk'); ?>" min='<?= date('Y-m-d') ?>' <?= !$this->session->userdata('id_user') ? 'disabled' : '' ?>>
                         <div class="invalid-feedback">
-                            <?= form_error('ffoto') ?>
+                            <?= form_error('ftanggal_masuk') ?>
                         </div>
                     </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-danger float-right">Submit</button>
+                    <?php if ($this->session->userdata('id_user')) { ?>
+                        <button type="submit" class="btn btn-danger float-right">Submit</button>
+                    <?php } else { ?>
+                        <a href="<?= base_url('auth/login') ?>" class="btn btn-danger float-right">Masuk untuk memesan kontrakan</a>
+                    <?php  } ?>
                 </div>
             </form>
         </div>

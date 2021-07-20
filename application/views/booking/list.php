@@ -30,12 +30,12 @@
                             <thead>
                                 <tr>
                                     <th style="width: 10px">No</th>
+                                    <th>Kode Booking</th>
                                     <th>Nama User</th>
                                     <th>Handphone</th>
                                     <th>Tgl Booking</th>
                                     <th>Kontrakan</th>
                                     <th>Tgl Masuk</th>
-                                    <th>Bukti Pembayaran</th>
                                     <th>Status</th>
                                     <th style="width: 10px">Modify</th>
                                 </tr>
@@ -45,20 +45,17 @@
                                 foreach ($pesanan as $key) : ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
+                                        <td><?= $key->kode_booking ?></td>
                                         <td><?= $key->nama_user ?></td>
                                         <td><?= $key->handphone ?></td>
                                         <td><?= $key->tgl_pesanan ?></td>
                                         <td><?= $key->nama_kontrakan ?></td>
                                         <td><?= $key->tgl_masuk ?></td>
-                                        <td class="text-center">
-                                            <img src="<?= base_url('./uploads/bukti_bayar/') . $key->bukti_bayar ?>" alt="foto bukti bayar" width="50" class="img-thumbnail img-detail" onclick="fotoDetail('<?= $key->id_pesanan ?>')">
-                                        </td>
                                         <td><?= status($key->status_pemesanan) ?></td>
                                         <td>
                                             <div class="btn-group">
                                                 <a href="<?= base_url('booking/detail/') . $key->id_pesanan ?>"><button type="button" class="btn btn-default btn-sm" data-tolltip="tooltip" data-placement="top" <button type="button" class="btn btn-default btn-sm"><i class="fas fa-eye" data-tolltip="tooltip" data-placement="top" title="Detail"></i></button>
                                                 </a>
-                                                <button type="button" class="btn btn-default btn-sm" onclick="deleteConfirm('<?= base_url() . 'pemilik/delete/' . $key->id_owner ?>')" data-tolltip="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash-alt"></i></button>
                                             </div>
                                         </td>
 

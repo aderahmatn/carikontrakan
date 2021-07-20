@@ -18,13 +18,14 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 10px">No</th>
+                                        <th>Kode Booking</th>
                                         <th>Nama User</th>
                                         <th>Handphone</th>
                                         <th>Tgl Booking</th>
                                         <th>Kontrakan</th>
                                         <th>Tgl Masuk</th>
-                                        <th>Bukti Pembayaran</th>
                                         <th>Status</th>
+                                        <th>Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -32,29 +33,26 @@
                                     foreach ($pesanan as $key) : ?>
                                         <tr>
                                             <td><?= $no++ ?></td>
+                                            <td><?= $key->kode_booking ?></td>
                                             <td><?= $key->nama_user ?></td>
                                             <td><?= $key->handphone ?></td>
                                             <td><?= $key->tgl_pesanan ?></td>
                                             <td><?= $key->nama_kontrakan ?></td>
                                             <td><?= $key->tgl_masuk ?></td>
-                                            <td class="text-center">
-                                                <img src="<?= base_url('./uploads/bukti_bayar/') . $key->bukti_bayar ?>" alt="foto bukti bayar" width="50" class="img-thumbnail img-detail" onclick="fotoDetail('<?= $key->id_pesanan ?>')">
-                                            </td>
+
                                             <td><?= status($key->status_pemesanan) ?></td>
-                                        </tr>
-                                        <!--foto modal-->
-                                        <div class="modal fade" id="fotoModal<?= $key->id_pesanan ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <img src="<?= base_url('./uploads/bukti_bayar/') . $key->bukti_bayar ?>" alt="foto bukti bayar" width="100%">
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-default" type="button" data-dismiss="modal"> Close</button>
-                                                    </div>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a href="<?= base_url('booking/pembayaran/') . $key->kode_booking ?>"><button type="button" class="btn btn-default btn-sm" data-tolltip="tooltip" data-placement="top" <button type="button" class="btn btn-default btn-sm" <?= $key->status_pemesanan == 'menunggu pembayaran' ? '' : 'disabled' ?>>konfirmasi pembayaran</button>
+                                                    </a>
                                                 </div>
-                                            </div>
-                                        </div>
+                                                <div class="btn-group">
+                                                    <a href="<?= base_url('booking/detail_pesanan/') . $key->id_pesanan ?>"><button type="button" class="btn btn-default btn-sm" data-tolltip="tooltip" data-placement="top" <button type="button" class="btn btn-default btn-sm">detail</button>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+
                                     <?php endforeach ?>
 
                                 </tbody>

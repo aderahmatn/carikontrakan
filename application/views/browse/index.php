@@ -16,6 +16,7 @@
             </div>
         </div>
         <ul class="list-group">
+            <h5 class="text-left mb-3"><?= $title ?></h5>
             <?php foreach ($kontrakan as $key) : ?>
                 <div class="card bg-light ">
                     <div class="card-body">
@@ -29,7 +30,11 @@
                                 <ul class="ml-4 fa-ul text-muted ">
                                     <li class="small"><?= ucfirst($key->deskripsi_alamat) ?> </li>
                                 </ul>
-                                <a href="<?= base_url('booking/kontrakan/') . $key->id_kontrakan ?>" class="btn btn-danger btn-block mt-5">Booking Sekarang</a>
+                                <?php if ($key->kamar_tersedia == 0) { ?>
+                                    <button disabled class="btn btn-danger btn-block mt-5">Kontrakan tidak tersedia</button>
+                                <?php } else { ?>
+                                    <a href="<?= base_url('booking/kontrakan/') . $key->id_kontrakan ?>" class="btn btn-danger btn-block mt-5">Booking Sekarang</a>
+                                <?php } ?>
                             </div>
 
                         </div>
@@ -71,7 +76,7 @@
         var konsan = L.marker(['<?= $key->lat ?>', '<?= $key->lon ?>'], {
             icon: homeIcon
         }).bindPopup(
-            "<img src='<?= base_url('./uploads/thumbnail/') . $key->thumbnail ?>' width='200'/></br></br><h6><?= ucwords($key->nama_kontrakan) ?></h6>Tersedia <?= $key->kamar_tersedia ?> kamar</br></br><h6><span class='badge badge-success'><?= rupiah($key->harga) ?></span></h6><h6><span class='badge badge-primary'><?= $key->kategori ?></span></h6></br><a href='<?= base_url('booking/kontrakan/') . $key->id_kontrakan ?>' class='btn btn-danger btn-block btn-sm text-white'>Booking Sekarang</a>", {
+            "<img src='<?= base_url('./uploads/thumbnail/') . $key->thumbnail ?>' width='200'/></br></br><h6><?= ucwords($key->nama_kontrakan) ?></h6>Tersedia <?= $key->kamar_tersedia ?> kamar</br></br><h6><span class='badge badge-success'><?= rupiah($key->harga) ?></span></h6><h6><span class='badge badge-primary'><?= $key->kategori ?></span></h6></br><?php if ($key->kamar_tersedia == 0) { ?> <button disabled class = 'btn btn-danger btn-block btn-sm text-white' > Kontrakan tidak tersedia </button><?php } else { ?> <a href = '<?= base_url('booking/kontrakan/') . $key->id_kontrakan ?>' class = 'btn btn-danger btn-block btn-sm text-white' > Booking Sekarang </a><?php } ?> ", {
                 maxWidth: "auto",
             }).addTo(map)
     <?php endforeach ?>

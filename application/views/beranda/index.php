@@ -4,7 +4,7 @@
         <p>
             cari kontrakan dengan harga, lokasi, dan tipe sesuai yang kamu mau hanya disini.
         </p>
-        <button class="btn btn-danger mt-3" onclick="search()">Cari Sekarang</button>
+        <a href="<?= base_url('browse') ?>" class="btn btn-danger mt-3" onclick="search()">Cari Sekarang</a>
     </div>
     <div class="col-md-6 text-center mt-3">
         <div style="opacity: 0.2;">
@@ -159,7 +159,6 @@
         </div>
     </div>
 </div>
-<?= date('d/m/Y') ?>
 <div class="mx-md-4 mt-4">
     <div class="bg-red p-3 mt-n4">
         <h3 class="py-3 text-center">Gak perlu ribet, cukup masukan lokasi kontrakan yang kamu mau</h3>
@@ -188,7 +187,11 @@
                         <span class="badge badge-secondary"><?= ucfirst($key->kategori) ?></span>
                         <span class="badge badge-success"><?= ucfirst($key->kamar_tersedia) ?> kamar tersedia</span> <br>
                         <p class="card-text mt-2"><?= ucfirst($key->deskripsi_alamat) ?></p>
-                        <a href="<?= base_url('booking/kontrakan/') . $key->id_kontrakan ?>" class="btn btn-danger">Pesan Kontrakan</a>
+                        <?php if ($key->kamar_tersedia == 0) { ?>
+                            <button class="btn btn-danger" disabled>Kontrakan tidak tersedia</button>
+                        <?php } else { ?>
+                            <a href="<?= base_url('booking/kontrakan/') . $key->id_kontrakan ?>" class="btn btn-danger">Pesan Kontrakan</a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

@@ -10,24 +10,42 @@ class Booking extends CI_Controller
         $this->load->model('kontrakan_m');
         $this->load->model('booking_m');
     }
-
-
     public function kontrakan($id = null)
     {
-        check_not_login_user();
         $data['kontrakan'] = $this->kontrakan_m->get_by_id($id);
+        $data['kode_booking'] = $this->booking_m->get_kode_booking($id);
         $this->template->load('shared/landing/index', 'booking/index', $data);
     }
-    public function submit_pesanan($id)
+    public function submit_pesanan($id, $kode)
     {
         $booking  = $this->booking_m;
         $validation = $this->form_validation;
         $validation->set_rules($booking->rules());
         if ($validation->run() == FALSE) {
-            check_not_login_user();
             $data['kontrakan'] = $this->kontrakan_m->get_by_id($id);
+            $data['kode_booking'] = $this->booking_m->get_kode_booking($id);
             $this->template->load('shared/landing/index', 'booking/index', $data);
         } else {
+            $post = $this->input->post(null, TRUE);
+            $booking->Add($post);
+            if ($this->db->affected_rows() > 0) {
+                $data['kode'] = $kode;
+                $data['kontrakan'] = $this->kontrakan_m->get_by_id($id);
+                $this->template->load('shared/landing/index', 'booking/pembayaran', $data);
+            }
+        }
+    }
+    public function pembayaran($kode)
+    {
+        $booking  = $this->booking_m;
+        $validation = $this->form_validation;
+        $validation->set_rules($booking->rules_konfrimasi());
+        if ($validation->run() == FALSE) {
+            $data['pesanan'] = $this->booking_m->get_by_kode($kode);
+            $data['kode'] = $kode;
+            $this->template->load('shared/landing/index', 'booking/konfirmasi', $data);
+        } else {
+            $post = $this->input->post(null, TRUE);
             $post = $this->input->post(null, TRUE);
             $config['upload_path']          = './uploads/bukti_bayar';
             $config['allowed_types']        = 'gif|jpg|png|jpeg';
@@ -35,16 +53,16 @@ class Booking extends CI_Controller
             $config['file_name']            = uniqid('img-');
             $this->load->library('upload', $config);
             if (!$this->upload->do_upload('ffoto')) {
-                $this->session->set_flashdata('error', 'bukti bayar harap diisi!');
-                check_not_login_user();
-                $data['kontrakan'] = $this->kontrakan_m->get_by_id($id);
-                $this->template->load('shared/landing/index', 'booking/index', $data);
+                $this->session->set_flashdata('error', 'Bukti bayar harap diisi!');
+                $data['pemilik'] = $this->pemilik_m->get_all();
+                $data['kecamatan'] = $this->kecamatan_m->get_all();
+                $this->template->load('shared/landing/index', 'booking/konfirmasi', $data);
             } else {
                 $data = $this->upload->data();
                 $file = $data['file_name'];
-                $booking->Add($post, $file);
+                $booking->konfirmasi_pembayaran($post, $file);
                 if ($this->db->affected_rows() > 0) {
-                    $this->session->set_flashdata('success', 'pesanan berhasil dikirim');
+                    $this->session->set_flashdata('success', 'konfirmasi pembayaran berhasil');
                     redirect('beranda', 'refresh');
                 }
             }
@@ -83,6 +101,12 @@ class Booking extends CI_Controller
         check_not_login_admin();
         $data['pesanan'] = $this->booking_m->get_by_id($id);
         $this->template->load('shared/admin/index', 'booking/detail', $data);
+    }
+    public function detail_pesanan($id)
+    {
+        check_not_login_user();
+        $data['pesanan'] = $this->booking_m->get_by_id($id);
+        $this->template->load('shared/landing/index', 'booking/detailpesanan', $data);
     }
 }
 
