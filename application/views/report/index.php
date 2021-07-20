@@ -43,21 +43,33 @@
                         </div>
                     </div>
                     <div class="row mt-4">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="fpemilik">Pemilik Kontrakan</label>
-                                <select class="form-control <?php echo form_error('fpemilik') ? 'is-invalid' : '' ?>" id="fpemilik" name="fpemilik">
-                                    <option value="" selected hidden>Pilih Pemilik</option>
-                                    <option value="all">Semua Pemilik</option>
-                                    <?php foreach ($pemilik as $key) : ?>
-                                        <option value="<?= $key->id_owner ?>" <?= $this->input->post('fpemilik') == $key->id_owner ? 'selected' : '' ?>><?= $key->nama_owner ?></option>
-                                    <?php endforeach ?>
-                                </select>
-                                <div class="invalid-feedback">
-                                    <?= form_error('fpemilik') ?>
+                        <?php if ($this->session->userdata('id_owner') != null) { ?>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="fpemilik">Pemilik Kontrakan</label>
+                                    <input type="hidden" class="form-control" value="<?= $this->session->userdata('id_owner') ?>" name="fpemilik">
+                                    <input type="text" class="form-control" value="<?= $this->session->userdata('nama_admin') ?>" readonly>
+
                                 </div>
                             </div>
-                        </div>
+                        <?php } else { ?>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="fpemilik">Pemilik Kontrakan</label>
+                                    <select class="form-control <?php echo form_error('fpemilik') ? 'is-invalid' : '' ?>" id="fpemilik" name="fpemilik">
+                                        <option value="" selected hidden>Pilih Pemilik</option>
+                                        <option value="all">Semua Pemilik</option>
+                                        <?php foreach ($pemilik as $key) : ?>
+                                            <option value="<?= $key->id_owner ?>" <?= $this->input->post('fpemilik') == $key->id_owner ? 'selected' : '' ?>><?= $key->nama_owner ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        <?= form_error('fpemilik') ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+
                         <div class="col-md-1 text-center justify-items-center">
                             <h5 class="mt-1"></h5>
                         </div>
@@ -104,8 +116,8 @@
                                         <th>Tgl Menempati</th>
                                         <th>Kontrakan</th>
                                         <th>Nama Pemilik</th>
-                                        <th>Total Bayar</th>
                                         <th>Status</th>
+                                        <th>Total Bayar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -119,10 +131,15 @@
                                             <td><?= $key->tgl_masuk ?></td>
                                             <td><?= $key->nama_kontrakan ?></td>
                                             <td><?= $key->nama_owner ?></td>
-                                            <td><?= rupiah($key->harga) ?></td>
                                             <td><?= $key->status_pemesanan ?></td>
+                                            <td><?= rupiah($key->harga) ?></td>
+
                                         </tr>
                                     <?php endforeach ?>
+                                    <tr>
+                                        <td colspan="7" class="text-center"><strong>Total Pendapatan</strong></td>
+                                        <td><?= rupiah($total) ?></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

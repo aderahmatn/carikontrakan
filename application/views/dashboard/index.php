@@ -1,69 +1,70 @@
-<div class="row">
-    <div class="col-12 col-sm-6 col-md-3">
-        <div class="info-box">
-            <span class="info-box-icon bg-info elevation-1"><i class="nav-icon fas fa-door-open"></i></span>
-
-            <div class="info-box-content">
-                <span class="info-box-text">Total Kontrakan</span>
-                <span class="info-box-number">
-                    <?= $totalKontrakan ?>
-                </span>
+<?php if ($this->session->userdata('is_owner') == 0) { ?>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="nav-icon fas fa-door-open"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Total Kontrakan</span>
+                    <span class="info-box-number">
+                        <?= $totalKontrakan ?>
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box-content -->
+            <!-- /.info-box -->
         </div>
-        <!-- /.info-box -->
-    </div>
-    <!-- /.col -->
-    <div class="col-12 col-sm-6 col-md-3">
-        <div class="info-box mb-3">
-            <span class="info-box-icon bg-danger elevation-1"><i class="nav-icon fab fa-keycdn"></i></span>
+        <!-- /.col -->
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="nav-icon fab fa-keycdn"></i></span>
 
-            <div class="info-box-content">
-                <span class="info-box-text">Total Pemesanan Kontrakan</span>
-                <span class="info-box-number"> <?= $totalPesanan ?>
-                </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Total Pemesanan Kontrakan</span>
+                    <span class="info-box-number"> <?= $totalPesanan ?>
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box-content -->
+            <!-- /.info-box -->
         </div>
-        <!-- /.info-box -->
-    </div>
-    <!-- /.col -->
+        <!-- /.col -->
 
-    <!-- fix for small devices only -->
-    <div class="clearfix hidden-md-up"></div>
+        <!-- fix for small devices only -->
+        <div class="clearfix hidden-md-up"></div>
 
-    <div class="col-12 col-sm-6 col-md-3">
-        <div class="info-box mb-3">
-            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user"></i></span>
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user"></i></span>
 
-            <div class="info-box-content">
-                <span class="info-box-text">Total User Terdaftar</span>
-                <span class="info-box-number"> <?= $totalUser ?>
-                </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Total User Terdaftar</span>
+                    <span class="info-box-number"> <?= $totalUser ?>
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box-content -->
+            <!-- /.info-box -->
         </div>
-        <!-- /.info-box -->
-    </div>
-    <!-- /.col -->
-    <div class="col-12 col-sm-6 col-md-3">
-        <div class="info-box mb-3">
-            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-key"></i></span>
+        <!-- /.col -->
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-key"></i></span>
 
-            <div class="info-box-content">
-                <span class="info-box-text">Total Pemilik Kontrakan</span>
-                <span class="info-box-number"> <?= $totalPemilik ?>
-                </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Total Pemilik Kontrakan</span>
+                    <span class="info-box-number"> <?= $totalPemilik ?>
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box-content -->
+            <!-- /.info-box -->
         </div>
-        <!-- /.info-box -->
+        <!-- /.col -->
     </div>
-    <!-- /.col -->
-</div>
+<?php } ?>
 <div class="row mx-md-4">
     <div class="col-md-6 align-self-center">
-        <h1 class="font-weight-bolder">Selamat datang di dashboard administrator</h1>
+        <h1 class="font-weight-bolder">Selamat datang di dashboard <?= $this->session->userdata('is_owner') == 0 ? 'administrator' : 'pemilik kontrakan' ?></h1>
         <p>
             kelola kontrakan lebih mudah dengan carikontrakan
         </p>

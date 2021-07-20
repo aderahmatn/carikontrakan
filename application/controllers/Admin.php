@@ -7,6 +7,7 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        check_not_login_admin();
         $this->load->model('admin_m');
     }
 

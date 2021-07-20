@@ -16,6 +16,10 @@
             </div>
         </div>
         <ul class="list-group">
+            <?php if ($alert != null) { ?>
+
+                <span class="alert alert-warning text-left mb-3"><?= $alert ?></span>
+            <?php } ?>
             <h5 class="text-left mb-3"><?= $title ?></h5>
             <?php foreach ($kontrakan as $key) : ?>
                 <div class="card bg-light ">

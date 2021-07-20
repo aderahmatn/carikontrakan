@@ -7,7 +7,9 @@ class Pemilik extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        check_not_login_admin();
         $this->load->model('pemilik_m');
+        $this->load->model('admin_m');
     }
 
 
@@ -19,6 +21,7 @@ class Pemilik extends CI_Controller
     public function create()
     {
         $pemilik  = $this->pemilik_m;
+        $admin  = $this->admin_m;
         $validation = $this->form_validation;
         $validation->set_rules($pemilik->rules());
         if ($validation->run() == FALSE) {
@@ -26,6 +29,7 @@ class Pemilik extends CI_Controller
         } else {
             $post = $this->input->post(null, TRUE);
             $pemilik->Add($post);
+            $admin->add_is_owner($post);
             if ($this->db->affected_rows() > 0) {
                 $this->session->set_flashdata('success', 'Data pemilik berhasil disimpan!');
                 redirect('pemilik', 'refresh');

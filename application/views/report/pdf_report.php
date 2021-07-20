@@ -24,8 +24,8 @@ $pdf->Cell(40, 6, 'Tgl Pesanan', 1, 0, 'C');
 $pdf->Cell(30, 6, 'Tgl Menempati', 1, 0, 'C');
 $pdf->Cell(40, 6, 'Kontrakan', 1, 0, 'C');
 $pdf->Cell(25, 6, 'Pemilik', 1, 0, 'C');
-$pdf->Cell(40, 6, 'Total Bayar', 1, 0, 'C');
-$pdf->Cell(50, 6, 'Status', 1, 1, 'C');
+$pdf->Cell(50, 6, 'Status', 1, 0, 'C');
+$pdf->Cell(40, 6, 'Total Bayar', 1, 1, 'C');
 $pdf->SetFont('Arial', '', 8, 'C');
 $no = 1;
 foreach ($result as $key) {
@@ -35,9 +35,14 @@ foreach ($result as $key) {
     $pdf->Cell(30, 6, $key->tgl_masuk, 1, 0);
     $pdf->Cell(40, 6, $key->nama_kontrakan, 1, 0);
     $pdf->Cell(25, 6,  $key->nama_owner, 1, 0);
-    $pdf->Cell(40, 6, rupiah($key->harga), 1, 0);
-    $pdf->Cell(50, 6, $key->status_pemesanan, 1, 1);
+    $pdf->Cell(50, 6, $key->status_pemesanan, 1, 0);
+    $pdf->Cell(40, 6, rupiah($key->harga), 1, 1);
 }
+$pdf->SetFont('Arial', 'B', 10);
+$pdf->Cell(235, 6, 'Total Pendapatan', 1, 0, 'C');
+$pdf->SetFont('Arial', '', 8, 'C');
+$pdf->Cell(40, 6, rupiah($total), 1, 1);
+
 $pdf->ln();
 // $pdf->ln();
 // $pdf->Cell(217, 6, '', 0, 0);

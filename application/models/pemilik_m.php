@@ -12,6 +12,7 @@ class pemilik_m extends CI_Model
     public $email;
     public $alamat;
 
+
     public function rules()
     {
         return [
@@ -29,6 +30,16 @@ class pemilik_m extends CI_Model
                 'field' => 'femail',
                 'label' => 'Email',
                 'rules' => 'required'
+            ],
+            [
+                'field' => 'fpassword',
+                'label' => 'Password',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'fkonfirmasi_password',
+                'label' => 'Konfirmasi Password',
+                'rules' => 'required|matches[fpassword]'
             ],
             [
                 'field' => 'falamat',

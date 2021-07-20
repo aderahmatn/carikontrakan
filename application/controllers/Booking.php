@@ -54,8 +54,7 @@ class Booking extends CI_Controller
             $this->load->library('upload', $config);
             if (!$this->upload->do_upload('ffoto')) {
                 $this->session->set_flashdata('error', 'Bukti bayar harap diisi!');
-                $data['pemilik'] = $this->pemilik_m->get_all();
-                $data['kecamatan'] = $this->kecamatan_m->get_all();
+                $data['kode'] = $kode;
                 $this->template->load('shared/landing/index', 'booking/konfirmasi', $data);
             } else {
                 $data = $this->upload->data();

@@ -32,6 +32,7 @@ class Report extends CI_Controller
             $data['status'] = $post['fstatus'];
             $data['pemilik'] = $this->pemilik_m->get_all();
             $data['result'] = $this->report_m->get_by_range($tgl1, $tgl2, $pemilik, $status);
+            $data['total'] = $this->report_m->get_total($tgl1, $tgl2, $pemilik, $status);
             $this->template->load('shared/admin/index', 'report/index', $data);
         }
     }

@@ -69,6 +69,8 @@ class Auth extends CI_Controller
                 'id_admin' => $row->id_admin,
                 'nama_admin' => $row->nama_admin,
                 'email' => $row->email,
+                'is_owner' => $row->is_owner,
+                'id_owner' => $row->id_owner,
                 'status' => 'login_admin'
             );
             $this->session->set_userdata($params);
@@ -85,6 +87,8 @@ class Auth extends CI_Controller
             'nama_admin',
             'email',
             'status',
+            'is_owner',
+            'id_owner'
         );
         $this->session->unset_userdata($params);
         redirect('auth/loginadmin', 'refresh');

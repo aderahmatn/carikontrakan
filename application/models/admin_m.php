@@ -10,6 +10,7 @@ class admin_m extends CI_Model
     public $nama_admin;
     public $email;
     public $password;
+    public $is_owner;
 
     public function rules()
     {
@@ -69,6 +70,16 @@ class admin_m extends CI_Model
         $post = $this->input->post();
         $this->nama_admin = $post['fnama_admin'];
         $this->email = $post['femail'];
+        $this->is_owner = 0;
+        $this->password = md5($post['fpassword']);
+        $this->db->insert($this->_table, $this);
+    }
+    public function add_is_owner()
+    {
+        $post = $this->input->post();
+        $this->nama_admin = $post['fnama_pemilik'];
+        $this->email = $post['femail'];
+        $this->is_owner = 1;
         $this->password = md5($post['fpassword']);
         $this->db->insert($this->_table, $this);
     }
@@ -89,7 +100,8 @@ class admin_m extends CI_Model
     {
         $this->db->select('*');
         $this->db->from($this->_table);
-        $this->db->where('email', $post['femail']);
+        $this->db->join('owners', 'owners.email = admins.email', 'left');
+        $this->db->where('admins.email', $post['femail']);
         $this->db->where('password', md5($post['fpassword']));
         $query = $this->db->get();
         return $query;

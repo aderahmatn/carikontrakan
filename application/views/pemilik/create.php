@@ -39,6 +39,20 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="fpassword">Password Login</label>
+                        <input type="password" class="form-control <?= form_error('fpassword') ? 'is-invalid' : '' ?>" id="fpassword" name="fpassword" placeholder="Email pemilik" value="<?= $this->input->post('fpassword'); ?>">
+                        <div class="invalid-feedback">
+                            <?= form_error('fpassword') ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fkonfirmasi_password">Konfirmasi Password</label>
+                        <input type="password" class="form-control <?= form_error('fkonfirmasi_password') ? 'is-invalid' : '' ?>" id="fkonfirmasi_password" name="fkonfirmasi_password" placeholder="Email pemilik" value="<?= $this->input->post('fkonfirmasi_password'); ?>">
+                        <div class="invalid-feedback">
+                            <?= form_error('fkonfirmasi_password') ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="fhandphone">Handphone</label>
                         <input type="text" class="form-control <?= form_error('fhandphone') ? 'is-invalid' : '' ?>" id="fhandphone" name="fhandphone" placeholder="Nomor handphone" value="<?= $this->input->post('fhandphone'); ?>">
                         <div class="invalid-feedback">

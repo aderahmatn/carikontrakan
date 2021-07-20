@@ -81,47 +81,70 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url('iklansaya') ?>" class="nav-link <?= $this->uri->segment(1) == 'iklansaya' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
-                                <i class="nav-icon fas fa-door-open"></i>
-                                <p>
-                                    Iklan Kontrakan
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url('booking/list') ?>" class="nav-link <?= $this->uri->segment(1) == 'booking' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
-                                <i class="nav-icon fab fa-keycdn"></i>
-                                <p>
-                                    Daftar Booking
-                                </p>
-                            </a>
-                        </li>
+                        <!-- khusus admin -->
+                        <?php if ($this->session->userdata('is_owner') == 0) { ?>
+                            <li class="nav-item">
+                                <a href="<?php echo base_url('iklansaya') ?>" class="nav-link <?= $this->uri->segment(1) == 'iklansaya' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
+                                    <i class="nav-icon fas fa-door-open"></i>
+                                    <p>
+                                        Iklan Kontrakan
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?php echo base_url('booking/list') ?>" class="nav-link <?= $this->uri->segment(1) == 'booking' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
+                                    <i class="nav-icon fab fa-keycdn"></i>
+                                    <p>
+                                        Daftar Booking
+                                    </p>
+                                </a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a href="<?php echo base_url('admin') ?>" class="nav-link <?= $this->uri->segment(1) == 'admin' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>
-                                    Master Administrator
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url('pemilik') ?>" class="nav-link <?= $this->uri->segment(1) == 'pemilik' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
-                                <i class="nav-icon fas fa-key"></i>
-                                <p>
-                                    Master Pemilik Kontrakan
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url('report') ?>" class="nav-link <?= $this->uri->segment(1) == 'report' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
-                                <i class="nav-icon fas fa-file"></i>
-                                <p>
-                                    Laporan Pemesanan
-                                </p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="<?php echo base_url('admin') ?>" class="nav-link <?= $this->uri->segment(1) == 'admin' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
+                                    <i class="nav-icon fas fa-user-lock"></i>
+                                    <p>
+                                        Master Administrator
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?php echo base_url('users') ?>" class="nav-link <?= $this->uri->segment(1) == 'users' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        Master Users
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?php echo base_url('pemilik') ?>" class="nav-link <?= $this->uri->segment(1) == 'pemilik' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
+                                    <i class="nav-icon fas fa-key"></i>
+                                    <p>
+                                        Master Pemilik Kontrakan
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?php echo base_url('report') ?>" class="nav-link <?= $this->uri->segment(1) == 'report' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
+                                    <i class="nav-icon fas fa-file"></i>
+                                    <p>
+                                        Laporan Pemesanan
+                                    </p>
+                                </a>
+                            </li>
+                            <!-- khusus admin -->
+                        <?php  } else { ?>
+                            <li class="nav-item">
+                                <a href="<?php echo base_url('report') ?>" class="nav-link <?= $this->uri->segment(1) == 'report' ? 'active' : '' ?><?= $this->uri->segment(1) == '' ? 'active' : '' ?>">
+                                    <i class="nav-icon fas fa-file"></i>
+                                    <p>
+                                        Laporan Pemesanan
+                                    </p>
+                                </a>
+                            </li>
+                        <?php } ?>
+
+
                         <li class="nav-item">
                             <hr>
                         </li>
